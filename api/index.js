@@ -2,9 +2,9 @@ import path from "path";
 import express from "express";
 import logger from "morgan";
 
-import connectDB from "./connection/db.js";
-import usersRouter from "./routes/users.js";
-import questionsRouter from "./routes/questions.js";
+import connectDB from "../connection/db.js";
+import usersRouter from "../routes/users.js";
+import questionsRouter from "../routes/questions.js";
 
 // MongoDB Atlas connection
 connectDB();
