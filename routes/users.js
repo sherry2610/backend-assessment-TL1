@@ -1,3 +1,5 @@
+import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 import bodyParser from "body-parser";
 import bcrypt from "bcryptjs";
@@ -15,7 +17,7 @@ router.post("/signup", async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({ name, email, password: hashedPassword, role });
     await user.save();
-    const accessToken = jwt.sign({ email, role }, "secret_key", {
+    const accessToken = jwt.sign({ email, role }, process.env.JWT_SECRET, {
       expiresIn: "1d",
     });
     console.log("signup res", { email, accessToken });
@@ -33,9 +35,13 @@ router.post("/login", async (req, res) => {
     if (!user || !(await bcrypt.compare(password, user.password))) {
       res.status(401).json({ error: "Invalid credentials" });
     } else {
-      const accessToken = jwt.sign({ email, role: user.role }, "secret_key", {
-        expiresIn: "1d",
-      });
+      const accessToken = jwt.sign(
+        { email, role: user.role },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "1d",
+        }
+      );
       res.json({ email, accessToken });
     }
   } catch (err) {

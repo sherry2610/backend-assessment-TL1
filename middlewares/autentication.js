@@ -1,3 +1,5 @@
+import dotenv from "dotenv";
+dotenv.config();
 import jwt from "jsonwebtoken";
 // const jwt = require("jsonwebtoken");
 // Middleware to differentiate admins from participants
@@ -8,7 +10,7 @@ const isAdmin = (req, res, next) => {
   } else {
     try {
       console.log("new new 1", accessToken);
-      const user = jwt.verify(accessToken, "secret_key");
+      const user = jwt.verify(accessToken, process.env.JWT_SECRET);
       const { role } = user;
       console.log("new new 2", user);
       if (role !== "admin") {
