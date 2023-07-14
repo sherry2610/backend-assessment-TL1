@@ -9,6 +9,14 @@ import User from "../models/User.js";
 const router = express.Router();
 router.use(bodyParser.json());
 
+router.get("/", async (req, res) => {
+  try {
+    res.json({ message: "Welcome to the server!" });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to login" });
+  }
+});
+
 // Signup endpoint
 router.post("/signup", async (req, res) => {
   try {
