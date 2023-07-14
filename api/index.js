@@ -3,8 +3,8 @@ import express from "express";
 import logger from "morgan";
 
 import connectDB from "../connection/db.js";
-import usersRouter from "../routes/users.js";
-import questionsRouter from "../routes/questions.js";
+import usersRouter from "./users.js";
+import questionsRouter from "./questions.js";
 
 // MongoDB Atlas connection
 connectDB();
