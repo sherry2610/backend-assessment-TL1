@@ -2,9 +2,9 @@ import path from "path";
 import express from "express";
 import logger from "morgan";
 
-import connectDB from "../connection/db.js";
-import usersRouter from "./users.js";
-import questionsRouter from "./questions.js";
+import connectDB from "./connection/db.js";
+import usersRouter from "./routes/users.js";
+import questionsRouter from "./routes/questions.js";
 
 // MongoDB Atlas connection
 connectDB();
@@ -18,7 +18,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/", usersRouter);
 app.use("/admin", questionsRouter);
 
+export default app;
+
 // Start the server
-app.listen(5000, () => {
-  console.log("Server started on port 5000");
-});
+// app.listen(5000, () => {
+//   console.log("Server started on port 5000");
+// });
